@@ -1,5 +1,5 @@
 1. Part Create True Pill Measure
-      True Pill = 
+    <b>  True Pill = 
       VAR _Width = "150"
       VAR _Height = "50"
       VAR _FillColour = "#00BF77"
@@ -13,6 +13,7 @@
         <rect width='" & _Width & "' height='" & _Height & "' rx='25' ry='25' fill='" & _FillColour & "' />
         <text x='50%' y='50%' fill='" & _TextColour & "' font-family='" & _FontStyle & "' font-size='" & _FontSize & "' dominant-baseline='middle' text-anchor='middle'>"& _DisplayText &"</text>
       </svg>"
+</b>
 
 Set Data Category(Measure tools) to Image URL
 
