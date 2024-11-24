@@ -1,0 +1,33 @@
+The first measure is:
+  DAX
+    Revenue This Year = 
+      CALCULATE(
+          [Total Revenue],
+          YEAR('Calendar 📅'[Date]) = YEAR(TODAY())
+      )
+The second measure is:
+DAX
+  Previous Year  PY Revenue = 
+    CALCULATE(
+        SUM('Sales_fact📊'[revenue]),
+        SAMEPERIODLASTYEAR('Calendar 📅'[Date])
+    )
+
+To calculate delta, use this DAX formula:
+  DAX
+    Delta Revenue = 
+    [Revenue This Year] - [Previous Year Revenue]
+
+Delta Revenue % = 
+  DIVIDE([Delta Revenue], [Previous Year Revenue], 0) * 100
+
+Δ PY = 
+  VAR arrow_up = UNICHAR(9650)
+  VAR arrow_down = UNICHAR(9660)
+  VAR delta = [Delta Revenue]
+  RETURN
+  IF(delta > 0,
+      FORMAT(ROUND(delta, 0), "$#,###") & " " & arrow_up,
+      FORMAT(ROUND(delta, 0), "$#,###") & " " & arrow_down
+  )
+
