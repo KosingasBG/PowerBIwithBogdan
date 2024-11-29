@@ -7,11 +7,11 @@ The first measure is:
       )
 The second measure is:
 DAX
-  Previous Year  PY Revenue = 
+  Previous Year Revenue = 
     CALCULATE(
-        SUM('Sales_fact📊'[revenue]),
-        SAMEPERIODLASTYEAR('Calendar 📅'[Date])
-    )
+      [Total Revenue],
+      YEAR('Calendar 📅'[Date])=YEAR(TODAY())-1
+            )
 
 To calculate delta, use this DAX formula:
   DAX
