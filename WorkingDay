@@ -1,0 +1,13 @@
+IsWorkingDay = 
+SWITCH(
+    TRUE(),
+    WEEKDAY('Calendar'[Date], 2) > 5, "Not a Working Day", -- Weekends (Saturday and Sunday)
+    "Working Day"
+)
+
+
+Explanation:
+WEEKDAY([Date], 2): Returns the days from date as a number where Monday = 1 and Sunday = 7.
+> 5: Identifies weekends (Saturday-6 and Sunday-7).
+"Not a Working Day": Label for weekends. //can be customized
+"Working Day": Default label for other days. //can be customized
