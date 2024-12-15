@@ -1,4 +1,4 @@
-Animated SVG = 
+Animated BAR SVG = 
     // Calculate the maximum utilization from the 'Table'
     VAR _Percentage = INT(IF([% Sales Per Category]>= 1, 1, [% Sales Per Category]) * 100)
 
