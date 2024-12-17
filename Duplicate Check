@@ -1,0 +1,1 @@
+DuplicateFlag = IF(COUNTROWS(FILTER(Dim_Table, [Column] = EARLIER([Column]))) > 1, 1, 0)
