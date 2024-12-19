@@ -1,0 +1,28 @@
+Power BI doesn't have a native progress bar visual (besides the gauge I guess) but most modern web dashboards have some form of progress bar. I've been playing around with using dynamic SVG code written with DAX to make my own and I really like how it's turned out. SVGs can even be animated which may be distracting in practice but just the fact you can do it in Power BI was really neat to me and I thought I'd share. They're dynamic in so far as you can set the "progress value" to a dax measure or change the colors by adding logic to assign hex codes. I added some code below that shows how the progress bar rectangles were made.
+
+Custom GPT to help create these DAX | SVG measures: I've been using ChatGPT to help generate the code and it's been super effective. The challenge seems to be feeding the DAX variables into the right spots in the SVG to get them working and they have to be wrapped in double quotes which could be tedious writing the code by hand but it's no problem for the GPT. I built a GPT to help create these measures that create the SVG code. If you want to make your own SVG visuals you can use the GPT here: https://chatgpt.com/g/g-v4KFMr0Da-power-ui-gpt
+
+You can use these measures by going to the Image setting on the advanced card visual and setting the Image type to "Image URL" and then setting the value to the measure just created.
+
+Example DAX for the horizontal
+
+Horizontal Progress Bars SVG =
+VAR ProgressValue = 42 -- Current progress value (in percentage)
+VAR FilledColor =  [Brand 500] -- Color for fill in HEX format. Can be set to a measure that returns a HEX code i.e. "#2970FF"
+VAR UnfilledColor = "#E0E0E0" -- Color for unfilled bars
+VAR BarCount = 30
+VAR BarWidth = 5
+VAR BarHeight = 20
+VAR BarSpacing = 5
+VAR FilledBarCount = ROUNDUP((ProgressValue / 100) * BarCount, 0)
+RETURN
+"data:image/svg+xml;utf8,<svg xmlns='<http://www.w3.org/2000/svg>' viewBox='0 0 " & (BarCount * (BarWidth + BarSpacing)) & " " & (BarHeight + 10) & "' width='" & (BarCount * (BarWidth + BarSpacing)) & "' height='" & (BarHeight + 10) & "'>
+  " &
+  CONCATENATEX(
+    GENERATESERIES(0, BarCount - 1, 1),
+    "<rect x='" & [Value] * (BarWidth + BarSpacing) & "' y='5' width='" & BarWidth & "' height='" & BarHeight & "' rx='2' ry='2' fill='" & IF([Value] < FilledBarCount, FilledColor, UnfilledColor) & "' />",
+    ""
+  ) & "
+</svg>"
+
+Notes: if the svg code is really complex and long, it's not a good idea to put them into tables because it can slow down your report.
