@@ -1,0 +1,17 @@
+Просто SVG сладенькая для трех KPI
+!!!! SVG KPI BAR = 
+VAR __RandPlan1 = [%Plan_Sales_Achivement]*255/100*100
+VAR __RandPlan2 = [%Plan_Royaly]*255/100*100
+VAR __RandPlan3 = [%Plan_Request]*255/100*100
+RETURN
+"
+data:image/svg+xml;utf8,
+<svg width='515' height='255' viewBox='0 0 515 255' fill='none' xmlns='http://www.w3.org/2000/svg'>
+<rect width='165' height='255' rx='28' fill='#1E293B'/>
+<rect y='0' width='165' height='"&__RandPlan1&"' rx='28' fill='#334155' transform='rotate (180 82.5 130)'/>
+<rect x='175' width='165' height='255' rx='28' fill='#115E59'/>
+<rect x='175' y='0' width='165' height='"&__RandPlan2&"' rx='28' fill='#14B8A6' transform='rotate (180 257.5 130)'/>
+<rect x='350' width='165' height='255' rx='28' fill='#9F1239'/>
+<rect x='350' y='0' width='165' height='"&__RandPlan3&"' rx='28' fill='#F43F5E' transform='rotate (180 432.5 130)'/>
+</svg>
+"
