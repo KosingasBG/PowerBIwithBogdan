@@ -4,8 +4,8 @@ var num_1 = INT(IF(__Percent>1,100,__Percent*100))
 VAR __Colour = 
 SWITCH(
     TRUE(),
-    num_1<=60, "#901F1F", -- red
-    num_1<=80, "#DFB228", --yellow
+    num_1<=50, "#901F1F", -- red
+    num_1<=70, "#DFB228", --yellow
     "#6C882A" --зеленый
 )
 VAR __JP = 90  --- the target value can be replaced with a measure
@@ -30,8 +30,8 @@ VAR num_1 = INT(IF(__Percent>1,100,__Percent*100))
 VAR __Colour = 
 SWITCH(
     TRUE(), -- set target treshold
-    num_1<=60, "#FF0000", -- red
-    num_1<=80, "#fffb00", --yellow
+    num_1<=50, "#FF0000", -- red
+    num_1<=70, "#fffb00", --yellow
     "#228B22" --green everything else above 80 will be green
 )
 VAR __JP = 90  --- the target value can be replaced with a measure
