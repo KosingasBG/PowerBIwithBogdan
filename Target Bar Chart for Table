@@ -1,16 +1,14 @@
-Решение для достижения плана свыше 100% и отображения целевого значения через SVG в матрице.
-
-достигатор = 
-VAR __Percent = [выполнение %] --ваша мера выполнения
+Solution for achieving a plan over 100% and displaying the target value through SVG in the matrix= 
+VAR __Percent = [% Sales Per Category] --your performance measure
 var num_1 = INT(IF(__Percent>1,100,__Percent*100))
 VAR __Colour = 
 SWITCH(
     TRUE(),
-    num_1<=60, "#901F1F", -- красный
-    num_1<=80, "#DFB228", --желтый
+    num_1<=60, "#901F1F", -- red
+    num_1<=80, "#DFB228", --yellow
     "#6C882A" --зеленый
 )
-VAR __JP = 90  --- целевое значение, можно заменить на меру
+VAR __JP = 90  --- the target value can be replaced with a measure
 
 return
 "
@@ -21,7 +19,7 @@ data:image/svg+xml;utf8,
 <line x1='"&__JP&"' y1='0'   x2='"&__JP&"' y2='"&__JP&"'  stroke='black' stroke-width='2'/>
 "
 &
-IF(num_1>=100, --если значение больше 100%, то рисуется звезда
+IF(num_1>=100, --if the value is greater than 100%, a star is drawn.
 "<path d='M10 0L13.1153 5.71221L19.5106 6.90983L15.0406 11.6378L15.8779 18.0902L10 15.3L4.12215 18.0902L4.9594 11.6378L0.489435 6.90983L6.88474 5.71221L10 0Z' fill='#FFFFFF'/>")
 &"
 </svg>
