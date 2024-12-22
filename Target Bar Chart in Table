@@ -8,7 +8,7 @@ SWITCH(
     num_1<=70, "#fffb00", --yellow
     "#228B22" --green everything else above 70 will be green
 )
-VAR __JP = 90  --- the target value can be replaced with a measure
+VAR __Target = 90  --- the target value can be replaced with a measure
 
 return
 "
@@ -34,7 +34,7 @@ SWITCH(
     num_1<=70, "#fffb00", --yellow
     "#228B22" --green everything else above 70 will be green
 )
-VAR __JP = 90  --- the target value can be replaced with a measure
+VAR __Target = 90  --- the target value can be replaced with a measure
 
 RETURN
 "
