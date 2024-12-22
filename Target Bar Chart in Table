@@ -16,7 +16,7 @@ data:image/svg+xml;utf8,
 <svg width='100' height='20' viewBox='0 0 100 20' fill='none' xmlns='http://www.w3.org/2000/svg'>
 <rect width='100' height='20' rx ='5' fill='#D9D9D9'/>  
 <rect width='"&num_1&"' height='20' rx ='5' fill='"&__Colour&"'/>
-<line x1='"&__JP&"' y1='0'   x2='"&__JP&"' y2='"&__JP&"'  stroke='black' stroke-width='2'/>
+<line x1='"&__Target&"' y1='0'   x2='"&__Target&"' y2='"&__Target&"'  stroke='black' stroke-width='2'/>
 "
 &
 IF(num_1>=100, --if the value is greater than 100%, a star is drawn.
@@ -42,7 +42,7 @@ data:image/svg+xml;utf8,
 <svg width='100' height='20' viewBox='0 0 100 20' fill='none' xmlns='http://www.w3.org/2000/svg'>
 <rect width='100' height='20' rx='5' fill='#D9D9D9'/>  
 <rect width='"&num_1&"' height='20' rx='5' fill='"&__Colour&"'/>
-<line x1='"&__JP&"' y1='0' x2='"&__JP&"' y2='20' stroke='black' stroke-width='2'/>
+<line x1='"&__Target&"' y1='0' x2='"&__Target&"' y2='20' stroke='black' stroke-width='2'/>
 
 <!-- Label text displaying the percentage -->
 <text x='40' y='12' fill='black' text-anchor='middle' dominant-baseline='middle' font-family='Arial' font-weight='bold' font-size='12'>" & INT(__Percent * 100) & "%</text>
