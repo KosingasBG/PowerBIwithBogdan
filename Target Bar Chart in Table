@@ -1,12 +1,12 @@
-Solution for achieving a plan over 100% and displaying the target value through SVG in the matrix (without label) = 
+SVG Target Bar Chart (without label) = 
 VAR __Percent = [% Sales Per Category] --your performance measure
 var num_1 = INT(IF(__Percent>1,100,__Percent*100))
 VAR __Colour = 
 SWITCH(
     TRUE(),
-    num_1<=50, "#901F1F", -- red
-    num_1<=70, "#DFB228", --yellow
-    "#6C882A" --зеленый
+    num_1<=50, "#FF0000", -- red
+    num_1<=70, "#fffb00", --yellow
+    "#228B22" --green everything else above 70 will be green
 )
 VAR __JP = 90  --- the target value can be replaced with a measure
 
@@ -24,7 +24,7 @@ IF(num_1>=100, --if the value is greater than 100%, a star is drawn.
 &"
 </svg>
 "
-Solution for achieving a plan over 100% and displaying the target value through SVG in the matrix (with label and lighter colors)= 
+SVG Target Bar Chart (with label and lighter colors)= 
 VAR __Percent = [% Sales Per Category] --your performance measure
 VAR num_1 = INT(IF(__Percent>1,100,__Percent*100))
 VAR __Colour = 
@@ -32,7 +32,7 @@ SWITCH(
     TRUE(), -- set target treshold
     num_1<=50, "#FF0000", -- red
     num_1<=70, "#fffb00", --yellow
-    "#228B22" --green everything else above 80 will be green
+    "#228B22" --green everything else above 70 will be green
 )
 VAR __JP = 90  --- the target value can be replaced with a measure
 
