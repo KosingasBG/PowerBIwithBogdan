@@ -35,3 +35,55 @@ Animated BAR SVG =
                 <animate attributeName='width' from='0' to='" & _ProgressBar & "' dur='4s' fill='freeze'/>
             </rect>
         </svg>"
+
+IF ONE OF PROGRESS BARS IS STATIC USE THIS DAX (CORRECTED VERSION)
+Animated BAR SVG = 
+    // Calculate the maximum utilization from the 'Table'
+    VAR _Percentage = INT(IF([Compliance%]>= 1, 1, [Compliance%]) * 100)
+    // Format the utilization percentage for display
+    VAR _PercentageFormate = FORMAT(_Percentage, "#0")
+    // Calculate the width of the progress bar based on the utilization percentage
+    VAR _ProgressBar = _Percentage * 4 // Scaled width for the bar (4x larger)
+    // Construct the SVG image with dynamic values
+    RETURN
+        "data:image/svg+xml;utf8," &
+        UNICHAR(10) &
+        "<svg width='480' height='80' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='https://lnkd.in/dZ5ikEfb' display='block' overflow='visible' id='svg_" & RAND() & "'>" &
+        UNICHAR(10) &
+        "    <defs>" &
+        UNICHAR(10) &
+        "        <!-- Define a linear gradient for the progress BAR #24D1DB is blue color, 0FF14E is green-->" &
+        UNICHAR(10) &
+        "        <linearGradient id='gradient' x1='0%' y1='0%' x2='80%' y2='0%' gradientUnits='userSpaceOnUse'>" &
+        UNICHAR(10) &
+        "            <stop offset='45%' style='stop-color: #24D1DB' />" &
+        UNICHAR(10) &
+        "            <stop offset='130%' style='stop-color: #0FF14E'/>" &
+        UNICHAR(10) &
+        "        </linearGradient>" &
+        UNICHAR(10) &
+        "    </defs>" &
+        UNICHAR(10) &
+        "    <!-- Background (light grey) rectangle for the entire SVG -->" &
+        UNICHAR(10) &
+        "    <rect x='0' y='0' width='480' height='120' rx='40' ry='40' style='fill: #F4F4F4'/>" &
+        UNICHAR(10) &
+        "    <!-- Rectangle for the label (percentage number) background -->" &
+        UNICHAR(10) &
+        "    <rect x='10' y='10' width='148' height='60' rx='30' ry='30' style='fill: #A9A9A9' />" &
+        UNICHAR(10) &
+        "    <!-- Label text displaying the percentage -->" &
+        UNICHAR(10) &
+        "    <text x='84' y='40' fill='white' text-anchor='middle' dominant-baseline='middle' font-family='Arial' font-weight='bold' font-size='48'> "& INT([Compliance%] * 100) &" <tspan font-size='44' fill='white'> % </tspan> </text>" &
+        UNICHAR(10) &
+        "    <!-- Progress bar rectangle with animation -->" &
+        UNICHAR(10) &
+        "    <rect x='170' y='30' width='" & _ProgressBar & "' height='40' rx='20' ry='20' style='fill: url(#gradient)'>" &
+        UNICHAR(10) &
+        "        <!-- Animation to gradually increase the width of the progress bar -->" &
+        UNICHAR(10) &
+        "        <animate attributeName='width' from='0' to='" & _ProgressBar & "' dur='2s' fill='freeze'/>" &
+        UNICHAR(10) &
+        "    </rect>" &
+        UNICHAR(10) &
+        "</svg>"
