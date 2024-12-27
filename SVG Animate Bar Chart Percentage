@@ -35,7 +35,7 @@ Animated BAR SVG =
                 <animate attributeName='width' from='0' to='" & _ProgressBar & "' dur='4s' fill='freeze'/>
             </rect>
         </svg>"
-
+____________________________________________________________________________________________________________________________________________________
 IF ONE OF PROGRESS BARS IS STATIC USE THIS DAX (CORRECTED VERSION)
 Animated BAR SVG = 
     // Calculate the maximum utilization from the 'Table'
