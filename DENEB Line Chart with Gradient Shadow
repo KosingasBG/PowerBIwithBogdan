@@ -21,7 +21,7 @@ INSTRUCTIONS:
               Line 45: The point mark color : "color": "#52b788" //select HEX code you need. Purpose: This sets the color of the individual data points that appear when hovering over the chart.
             Line 102: "color": "#52b788", //select HEX code you need . Purpose: This sets the color of the text label that appears when hovering over a data point.
 
-13. If you want to change Label color in X and Y axis  change 
+13. If you want to change Label color in X and Y axis  change code below in Confiq pane :
             Line 38: Changed text fill color json "fill": "#d8f3dc" // Changed from "#605E5C" to "#d8f3dc" Purpose: This changes the default text color for any text elements in the chart.
           
           Line 45: Changed axis labelColor json "labelColor": "#d8f3dc", // Changed from "#605E5C" to "#d8f3dc" Purpose: This changes the color of the axis labels (the numbers or categories along the x and y axes).
