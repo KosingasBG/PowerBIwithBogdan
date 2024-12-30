@@ -1,0 +1,12 @@
+INSTRUCTIONS:
+1. Copy code below
+2. Paste it in Notepad
+3. Save as File_Name.json (json format!!!)
+4. In Power BI create Month Start column ->New Column -> Month Start = CalendarTable[Month]&"/1/"&CalendarTable[Year]
+5. Go to Visualizations Pane -> scroll down find : Get new visuals -> Search for DENEB ("orange" D icon) - > Add it
+6. Add Deneb visual on Reort pane-> in Values (Data) add Month Start and Measure you want to present in Line Chart
+7. Click on three dots in topr right corner and select Edit
+8. Window will aprear and on the left side under Import your file field, click on rectangle below (Click for browse...)
+9. Find JSON file you saved and select it
+10. On the right side of the window select Month Start column as a Date and measure you want to present as Value
+11. Click OK and in top left corner click on Go back to report.
