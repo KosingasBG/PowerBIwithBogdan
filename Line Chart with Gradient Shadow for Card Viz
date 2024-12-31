@@ -1,34 +1,35 @@
+GREY Color - If you want to change color update HEX code in lines 4 VAR LineColor and 8 and 9 stop stop color
 Opaque Area Sparkline (no one value) bright = 
 // Static line color - use %23 instead of # for Firefox compatibility (Measure Derived from Eldersveld Modified by Kolosko)
-VAR LineColour = "%23118DFF"
+VAR LineColour = "%23666666"
 VAR PointColour = "white"
 VAR Defs = "<defs>
     <linearGradient id='grad' x1='0' y1='25' x2='0' y2='50' gradientUnits='userSpaceOnUse'>
-        <stop stop-color='#118DFF' offset='0' />
-        <stop stop-color='#118DFF' offset='0.3' />
+        <stop stop-color='#666666' offset='0' />
+        <stop stop-color='#666666' offset='0.3' />
         <stop stop-color='white' offset='1' />
     </linearGradient>
 </defs>"
 // "Date" field used in this example along the X axis
-VAR XMinDate = MIN(financials[Date])
-VAR XMaxDate = MAX(financials[Date])
+VAR XMinDate = MIN('Calendar Table'[Month Start])
+VAR XMaxDate = MAX('Calendar Table'[Month Start])
 
 // Obtain overall min and overall max measure values when evaluated for each date
-VAR YMinValue = MINX(Values(financials[Date]),CALCULATE([SUM Gross Sales]))
-VAR YMaxValue = MAXX(Values(financials[Date]),CALCULATE([SUM Gross Sales]))
+VAR YMinValue = MINX(Values('Calendar Table'[Month Start]),CALCULATE([Total Sales]))
+VAR YMaxValue = MAXX(Values('Calendar Table'[Month Start]),CALCULATE([Total Sales]))
 
 // Build table of X & Y coordinates and fit to 50 x 150 viewbox
 VAR SparklineTable = ADDCOLUMNS(
-    SUMMARIZE('financials',financials[Date]),
-        "X",INT(150 * DIVIDE(financials[Date] - XMinDate, XMaxDate - XMinDate)),
-        "Y",INT(50 * DIVIDE([SUM Gross Sales] - YMinValue,YMaxValue - YMinValue)))
+    SUMMARIZE('Calendar Table','Calendar Table'[Month Start]),
+        "X",INT(150 * DIVIDE('Calendar Table'[Month Start]- XMinDate, XMaxDate - XMinDate)),
+        "Y",INT(50 * DIVIDE([Total Sales] - YMinValue,YMaxValue - YMinValue)))
 
 // Concatenate X & Y coordinates to build the sparkline
-VAR Lines = CONCATENATEX(SparklineTable,[X] & "," & 50-[Y]," ", financials[Date])
+VAR Lines = CONCATENATEX(SparklineTable,[X] & "," & 50-[Y]," ",'Calendar Table'[Month Start])
 
 // Last data points on the line
-VAR LastSparkYValue = MAXX( FILTER(SparklineTable, financials[Date] = XMaxDate), [Y])
-VAR LastSparkXValue = MAXX( FILTER(SparklineTable, financials[Date] = XMaxDate), [X])
+VAR LastSparkYValue = MAXX( FILTER(SparklineTable, 'Calendar Table'[Month Start] = XMaxDate), [Y])
+VAR LastSparkXValue = MAXX( FILTER(SparklineTable, 'Calendar Table'[Month Start] = XMaxDate), [X])
 
 // Add to SVG, and verify Data Category is set to Image URL for this measure
 VAR SVGImageURL = 
