@@ -16,6 +16,6 @@ Feel free to contribute by sharing your own tips and tricks via pull requests.
 Connect with Me
 Stay updated with the latest Power BI tips by:
 
-Subscribing to my YouTube channel: Power BI with  links here]
+Subscribing to my YouTube channel: Power BI with Bogdan
 Contributing
 Contributions are always welcome! Please feel free to submit a pull request or open an issue to discuss potential additions or improvements.
