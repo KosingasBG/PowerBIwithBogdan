@@ -1,1 +1,2 @@
-﻿{"name":"Custom","textClasses":{"label":{"fontSize":11},"title":{"color":"#666666"}},"dataColors":["#666666","#FFFFFF","#A3D2CA","#FFA07A","#98C1A9","#F1E8B8","#8E7CC3","#D64550"]}
+//This is JSON Theme file
+{"name":"Custom","textClasses":{"label":{"fontSize":11},"title":{"color":"#666666"}},"dataColors":["#666666","#FFFFFF","#A3D2CA","#FFA07A","#98C1A9","#F1E8B8","#8E7CC3","#D64550"]}
