@@ -1,0 +1,9 @@
+For Detail value in New Card Visulization (under reference labels)
+Closure Rate% (formatted) =
+IF (
+    [Closure Rate%] > 0.95,
+    "CR= " & FORMAT ( [Closure Rate%], "Percent" )
+        & UNICHAR ( 129093 ),
+    "CR= " & FORMAT ( [Closure Rate%], "Percent" )
+        & UNICHAR ( 129095 )
+)
