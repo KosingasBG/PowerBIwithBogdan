@@ -1,0 +1,9 @@
+#3ace9c green
+#753de7 purple
+#c3f0e1 light green
+#5027a3 purple dark
+#d0bdf5 purple light
+#e4e8f0 light grey 
+#f7f9fb light light grey for background
+
+
