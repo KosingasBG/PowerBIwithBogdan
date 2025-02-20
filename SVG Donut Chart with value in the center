@@ -42,3 +42,37 @@ RETURN
           transform='rotate(-90 " & CenterX & " " & CenterY & ")' stroke-linecap='round'/>
   <text x='" & CenterX & "' y='" & CenterY & "' text-anchor='middle' dy='.3em' font-size='20' fill='#333'>" & ProgressValue & "%</text>
 </svg>"
+
+//////////////
+Animated that changes color
+222Animated Circular Progress SVG = 
+VAR ProgressValue = [compliance test]*100 // Current progress (0-100)
+VAR Radius = 42
+VAR CircumferenceValue = 2 * PI() * Radius
+VAR ProgressLength = (ProgressValue / 100) * CircumferenceValue
+VAR CenterX = 60
+VAR CenterY = 60
+VAR BackgroundStrokeWidth = 12
+VAR ProgressStrokeWidth = 16
+VAR RedColor = "#FF0000"
+VAR AmberColor = "#FFA500"
+VAR GreenColor = "#00FF00"
+RETURN
+"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120' width='120' height='120'>
+  <style>
+    @keyframes progress-fill {
+      0% { stroke-dashoffset: " & CircumferenceValue & "; stroke: " & RedColor & "; }
+      50% { stroke-dashoffset: " & (CircumferenceValue - (CircumferenceValue * 0.5)) & "; stroke: " & AmberColor & "; }
+      90% { stroke-dashoffset: " & (CircumferenceValue - (CircumferenceValue * 0.9)) & "; stroke: " & AmberColor & "; }
+      100% { stroke-dashoffset: " & (CircumferenceValue - ProgressLength) & "; stroke: " & GreenColor & "; }
+    }
+    .progress-ring {
+      animation: progress-fill 2s ease-out forwards;
+    }
+  </style>
+  <circle cx='" & CenterX & "' cy='" & CenterY & "' r='" & Radius & "' fill='none' stroke='#E0E0E0' stroke-width='" & BackgroundStrokeWidth & "'/>
+  <circle class='progress-ring' cx='" & CenterX & "' cy='" & CenterY & "' r='" & Radius & "' fill='none' stroke='" & RedColor & "' stroke-width='" & ProgressStrokeWidth & "'
+          stroke-dasharray='" & CircumferenceValue & "' stroke-dashoffset='" & CircumferenceValue & "'
+          transform='rotate(-90 " & CenterX & " " & CenterY & ")' stroke-linecap='round'/>
+  <text x='" & CenterX & "' y='" & CenterY & "' text-anchor='middle' dy='.3em' font-size='20' fill='#333'>" & FORMAT(ProgressValue / 100, "0.00%") & "</text>
+</svg>"
