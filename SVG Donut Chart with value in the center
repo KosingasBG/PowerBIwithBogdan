@@ -1,0 +1,18 @@
+SVG Code for Donut Chart with value in the center 
+
+Circular Progress SVG Rounded = 
+VAR ProgressValue = 75 // Current progress (0-100)
+VAR Radius = 45 // Slightly reduced to accommodate rounded edges
+VAR CircumferenceValue = 2 * PI() * Radius
+VAR ProgressLength = (ProgressValue / 100) * CircumferenceValue
+VAR CenterX = 60
+VAR CenterY = 60
+VAR StrokeWidth = 12 // Increased stroke width for better visibility of rounded edges
+RETURN
+"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120' width='120' height='120'>
+  <circle cx='" & CenterX & "' cy='" & CenterY & "' r='" & Radius & "' fill='none' stroke='#E0E0E0' stroke-width='" & StrokeWidth & "'/>
+  <circle cx='" & CenterX & "' cy='" & CenterY & "' r='" & Radius & "' fill='none' stroke='#2970FF' stroke-width='" & StrokeWidth & "' 
+          stroke-dasharray='" & CircumferenceValue & "' stroke-dashoffset='" & (CircumferenceValue - ProgressLength) & "'
+          transform='rotate(-90 " & CenterX & " " & CenterY & ")' stroke-linecap='round'/>
+  <text x='" & CenterX & "' y='" & CenterY & "' text-anchor='middle' dy='.3em' font-size='20' fill='#333'>" & ProgressValue & "%</text>
+</svg>"
