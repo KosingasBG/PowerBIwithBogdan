@@ -1,0 +1,17 @@
+SVG Code for Donut Chart with value in the middle 
+
+Circular Progress SVG = 
+VAR ProgressValue = Measure (in%) // Current progress (0-100)
+VAR Radius = 50
+VAR CircumferenceValue = 2 * PI() * Radius
+VAR ProgressLength = (ProgressValue / 100) * CircumferenceValue
+VAR CenterX = 60
+VAR CenterY = 60
+RETURN
+"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120' width='120' height='120'>
+  <circle cx='" & CenterX & "' cy='" & CenterY & "' r='" & Radius & "' fill='none' stroke='#E0E0E0' stroke-width='10'/>
+  <circle cx='" & CenterX & "' cy='" & CenterY & "' r='" & Radius & "' fill='none' stroke='#2970FF' stroke-width='10' 
+          stroke-dasharray='" & CircumferenceValue & "' stroke-dashoffset='" & (CircumferenceValue - ProgressLength) & "'
+          transform='rotate(-90 " & CenterX & " " & CenterY & ")'/>
+  <text x='" & CenterX & "' y='" & CenterY & "' text-anchor='middle' dy='.3em' font-size='20'>" & ProgressValue & "%</text>
+</svg>"
