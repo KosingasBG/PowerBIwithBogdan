@@ -2,12 +2,12 @@ Animated BAR SVG =
     // Calculate the percentage from the 'Table'
     VAR _Percentage = INT([SLA Compliance Rate%] * 100)
     // SVG dimensions and positioning variables
-    VAR _TotalWidth = 800  // total width
-    VAR _TotalHeight = 160 // original height
-    VAR _BarHeight = 60    // progress bar
-    VAR _VerticalPadding = 45 // Increased top margin, use this to center bar chart
-    VAR _LabelWidth = 180  // label area
-    VAR _LabelHeight = 80  // label area
+    VAR _TotalWidth = 800  //  total width
+    VAR _TotalHeight = 200 //  height for larger elements
+    VAR _BarHeight = 60    //  progress bar
+    VAR _VerticalPadding = (_TotalHeight - _BarHeight) /2
+    VAR _LabelWidth = 180  //  label area
+    VAR _LabelHeight = 90 //  label area
     VAR _LabelVerticalPadding = (_TotalHeight - _LabelHeight) / 2
     VAR _MaxBarWidth = _TotalWidth - _LabelWidth - 30 // 30 = 10px left margin + 20px right margin
     VAR _ProgressBar = _Percentage * (_MaxBarWidth / 100) // Dynamic width calculation
@@ -43,19 +43,19 @@ Animated BAR SVG =
         UNICHAR(10) &
         "    <!-- Background (light grey) rectangle for the entire SVG -->" &
         UNICHAR(10) &
-        "    <rect x='0' y='0' width='" & _TotalWidth & "' height='" & _TotalHeight & "' rx='40' ry='40' style='fill: #e5e5e5'/>" &
+        "    <rect x='0' y='0' width='" & _TotalWidth & "' height='" & _TotalHeight & "' rx='40' ry='40' style='fill: #e5e5e5'/>" & // main rectangle color (bar background)
         UNICHAR(10) &
         "    <!-- Full-width grey background bar showing 100% scale -->" &
         UNICHAR(10) &
-        "    <rect x='" & (_LabelWidth + 20) & "' y='" & _VerticalPadding & "' width='" & _MaxBarWidth & "' height='" & _BarHeight & "' rx='20' ry='20' style='fill: #ffffff'/>" &
+        "    <rect x='" & (_LabelWidth + 20) & "' y='" & _VerticalPadding & "' width='" & _MaxBarWidth & "' height='" & _BarHeight & "' rx='20' ry='20' style='fill: #ffffff'/>" & // Remaining percentage (100% - bar value)
         UNICHAR(10) &
         "    <!-- Rectangle for the label (percentage number) background -->" &
         UNICHAR(10) &
-        "    <rect x='10' y='" & (_VerticalPadding - 10) & "' width='" & _LabelWidth & "' height='" & _LabelHeight & "' rx='30' ry='30' style='fill: #b0b0b0' />" &
+        "    <rect x='10' y='" & _LabelVerticalPadding & "' width='" & _LabelWidth & "' height='" & _LabelHeight & "' rx='30' ry='30' style='fill: #b0b0b0' />" & //number(value) background color
         UNICHAR(10) &
         "    <!-- Label text displaying the percentage -->" &
         UNICHAR(10) &
-        "    <text x='" & (10 + _LabelWidth/2) & "' y='" & (_VerticalPadding + _LabelHeight/2 - 10) & "' fill='white' text-anchor='middle' dominant-baseline='middle' font-family='Arial' font-weight='bold' font-size='70'>" & _Percentage & "<tspan font-size='65' fill='white'>%</tspan></text>" &
+        "    <text x='" & (10 + _LabelWidth/2) & "' y='" & (_LabelVerticalPadding + _LabelHeight/2 + 5) & "' fill='white'  text-anchor='middle' dominant-baseline='middle' font-family='Arial' font-weight='bold' font-size='85'>" & _Percentage & "<tspan font-size='80' fill='white'>%</tspan></text>" & //Percentage value color, change font size for value size
         UNICHAR(10) &
         "    <!-- Progress bar rectangle with animation -->" &
         UNICHAR(10) &
@@ -68,3 +68,4 @@ Animated BAR SVG =
         "    </rect>" &
         UNICHAR(10) &
         "</svg>"
+
