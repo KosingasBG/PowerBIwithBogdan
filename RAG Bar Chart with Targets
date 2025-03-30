@@ -15,20 +15,20 @@ VAR _ProgressBar = _Percentage * (_MaxBarWidth / 100) // Dynamic width calculati
 VAR _ColorStops = 
     SWITCH(
         TRUE(),
-        // BELOW 30% - SOLID RED
+        // BELOW 20% - SOLID RED
         _Percentage <= 20, 
             "<stop offset='0%' style='stop-color:#FF0000'/>" &
             "<stop offset='100%' style='stop-color:#FF0000'/>",
         
-        // BETWEEN 30-80% - RED TO AMBER TRANSITION
+        // BETWEEN 20-80% - RED TO AMBER TRANSITION
         _Percentage <= 80, 
             "<stop offset='0%' style='stop-color:#FF0000'/>" &
-            "<stop offset='30%' style='stop-color:#FF0000'/>" &
+            "<stop offset='20%' style='stop-color:#FF0000'/>" &
             "<stop offset='60%' style='stop-color:#FFA500'/>",
         
         // ABOVE 80% - RED TO AMBER TO GREEN TRANSITION
         "<stop offset='0%' style='stop-color:#FF0000'/>" &
-        "<stop offset='30%' style='stop-color:#FF0000'/>" &
+        "<stop offset='20%' style='stop-color:#FF0000'/>" &
         "<stop offset='80%' style='stop-color:#FFA500'/>" &
         "<stop offset='100%' style='stop-color:#00FF00'/>"
     )
@@ -53,15 +53,15 @@ RETURN
     UNICHAR(10) &
     "    <!-- Background (light grey) rectangle for the entire SVG -->" &
     UNICHAR(10) &
-    "    <rect x='0' y='0' width='" & _TotalWidth & "' height='" & _TotalHeight & "' rx='40' ry='40' style='fill: #e5e5e5'/>" &
+    "    <rect x='0' y='0' width='" & _TotalWidth & "' height='" & _TotalHeight & "' rx='40' ry='40' style='fill: #e5e5e5'/>" & // Main rectangle
     UNICHAR(10) &
     "    <!-- Full-width grey background bar showing 100% scale -->" &
     UNICHAR(10) &
-    "    <rect x='" & (_LabelWidth + 20) & "' y='" & _VerticalPadding & "' width='" & _MaxBarWidth & "' height='" & _BarHeight & "' rx='20' ry='20' style='fill: #ffffff'/>" &
+    "    <rect x='" & (_LabelWidth + 20) & "' y='" & _VerticalPadding & "' width='" & _MaxBarWidth & "' height='" & _BarHeight & "' rx='20' ry='20' style='fill: #ffffff'/>" & //remaining percentage bar 
     UNICHAR(10) &
     "    <!-- Rectangle for the label (percentage number) background -->" &
     UNICHAR(10) &
-    "    <rect x='10' y='" & _LabelVerticalPadding & "' width='" & _LabelWidth & "' height='" & _LabelHeight & "' rx='30' ry='30' style='fill: #b0b0b0' />" &
+    "    <rect x='10' y='" & _LabelVerticalPadding & "' width='" & _LabelWidth & "' height='" & _LabelHeight & "' rx='30' ry='30' style='fill: #b0b0b0' />" & // value rectangle background
     UNICHAR(10) &
     "    <!-- Label text displaying the percentage -->" &
     UNICHAR(10) &
