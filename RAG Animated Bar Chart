@@ -9,7 +9,7 @@ Animated BAR SVG =
     VAR _LabelWidth = 180  //  label area
     VAR _LabelHeight = 90 //  label area
     VAR _LabelVerticalPadding = (_TotalHeight - _LabelHeight) / 2
-    VAR _MaxBarWidth = _TotalWidth - _LabelWidth - 30 // 30 = 10px left margin + 20px right margin
+    VAR _MaxBarWidth = _TotalWidth - _LabelWidth - 60 // 60 = 20px left margin + 40px right margin
     VAR _ProgressBar = _Percentage * (_MaxBarWidth / 100) // Dynamic width calculation
     
     // Determine color based on percentage
@@ -68,4 +68,3 @@ Animated BAR SVG =
         "    </rect>" &
         UNICHAR(10) &
         "</svg>"
-
