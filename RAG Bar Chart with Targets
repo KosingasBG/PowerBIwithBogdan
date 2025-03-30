@@ -1,5 +1,5 @@
-svg2 = 
-VAR _Percentage = INT([SLA Compliance Rate%] * 100)
+test svg = 
+VAR _Percentage = INT(85)
 // SVG dimensions and positioning variables
 VAR _TotalWidth = 800  // total width
 VAR _TotalHeight = 200 // height for larger elements
@@ -18,13 +18,13 @@ VAR _ColorStops =
         // BELOW 20% - SOLID RED
         _Percentage <= 20, 
             "<stop offset='0%' style='stop-color:#FF0000'/>" &
-            "<stop offset='100%' style='stop-color:#FF0000'/>",
+            "<stop offset='20%' style='stop-color:#FF0000'/>",
         
         // BETWEEN 20-80% - RED TO AMBER TRANSITION
         _Percentage <= 80, 
             "<stop offset='0%' style='stop-color:#FF0000'/>" &
             "<stop offset='20%' style='stop-color:#FF0000'/>" &
-            "<stop offset='60%' style='stop-color:#FFA500'/>",
+            "<stop offset='80%' style='stop-color:#FFA500'/>",
         
         // ABOVE 80% - RED TO AMBER TO GREEN TRANSITION
         "<stop offset='0%' style='stop-color:#FF0000'/>" &
