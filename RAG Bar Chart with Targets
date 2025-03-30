@@ -1,36 +1,36 @@
-svg 2 bar = // Calculate the percentage from the 'Table'
+svg2 = 
 VAR _Percentage = INT([SLA Compliance Rate%] * 100)
 // SVG dimensions and positioning variables
-VAR _TotalWidth = 800  //  total width
-VAR _TotalHeight = 200 //  height for larger elements
-VAR _BarHeight = 60    //  progress bar
+VAR _TotalWidth = 800  // total width
+VAR _TotalHeight = 200 // height for larger elements
+VAR _BarHeight = 60    // progress bar
 VAR _VerticalPadding = (_TotalHeight - _BarHeight) /2
-VAR _LabelWidth = 180  //  label area
-VAR _LabelHeight = 90 //  label area
+VAR _LabelWidth = 180  // label area
+VAR _LabelHeight = 90  // label area
 VAR _LabelVerticalPadding = (_TotalHeight - _LabelHeight) / 2
 VAR _MaxBarWidth = _TotalWidth - _LabelWidth - 60 // 60 = 20px left margin + 40px right margin
 VAR _ProgressBar = _Percentage * (_MaxBarWidth / 100) // Dynamic width calculation
 
-// Determine gradient stops based on percentage with new thresholds
+// Determine gradient stops based on percentage with smooth transitions
 VAR _ColorStops = 
     SWITCH(
         TRUE(),
-        // BELOW 20% - SOLID RED
+        // BELOW 30% - SOLID RED
         _Percentage <= 20, 
-            "<stop offset='0%' style='stop-color:#FF0000'/>" &       // Start red
-            "<stop offset='100%' style='stop-color:#FF0000'/>",     // End red
+            "<stop offset='0%' style='stop-color:#FF0000'/>" &
+            "<stop offset='100%' style='stop-color:#FF0000'/>",
         
-        // BETWEEN 20-75% - RED TO AMBER TRANSITION
-        _Percentage <= 75, 
-            "<stop offset='0%' style='stop-color:#FF0000'/>" &     // Start red
-            "<stop offset='20%' style='stop-color:#FF0000'/>" &     // Keep red until 20% of bar
-            "<stop offset='100%' style='stop-color:#FFA500'/>",      // Transition to amber by end
+        // BETWEEN 30-80% - RED TO AMBER TRANSITION
+        _Percentage <= 80, 
+            "<stop offset='0%' style='stop-color:#FF0000'/>" &
+            "<stop offset='30%' style='stop-color:#FF0000'/>" &
+            "<stop offset='60%' style='stop-color:#FFA500'/>",
         
         // ABOVE 80% - RED TO AMBER TO GREEN TRANSITION
-        "<stop offset='0%' style='stop-color:#FF0000'/>" &          // Start red
-        "<stop offset='20%' style='stop-color:#FF0000'/>" &         // Keep red until 20% of bar
-        "<stop offset='50%' style='stop-color:#FFA500'/>" &        // Transition to amber by 60%
-        "<stop offset='100%' style='stop-color:#00FF00'/>"         // Transition to green by end
+        "<stop offset='0%' style='stop-color:#FF0000'/>" &
+        "<stop offset='30%' style='stop-color:#FF0000'/>" &
+        "<stop offset='80%' style='stop-color:#FFA500'/>" &
+        "<stop offset='100%' style='stop-color:#00FF00'/>"
     )
 
 // Construct the SVG image with dynamic values
@@ -41,7 +41,7 @@ RETURN
     UNICHAR(10) &
     "    <defs>" &
     UNICHAR(10) &
-    "        <!-- Gradient with dynamic color transitions based on percentage -->" &
+    "        <!-- Gradient with smooth color transitions -->" &
     UNICHAR(10) &
     "        <linearGradient id='gradient' x1='0%' y1='0%' x2='100%' y2='0%' gradientUnits='userSpaceOnUse'>" &
     UNICHAR(10) &
@@ -65,7 +65,7 @@ RETURN
     UNICHAR(10) &
     "    <!-- Label text displaying the percentage -->" &
     UNICHAR(10) &
-    "    <text x='" & (10 + _LabelWidth/2) & "' y='" & (_LabelVerticalPadding + _LabelHeight/2 + 5) & "' fill='white'  text-anchor='middle' dominant-baseline='middle' font-family='Arial' font-weight='bold' font-size='85'>" & _Percentage & "<tspan font-size='80' fill='white'>%</tspan></text>" &
+    "    <text x='" & (10 + _LabelWidth/2) & "' y='" & (_LabelVerticalPadding + _LabelHeight/2 + 5) & "' fill='white' text-anchor='middle' dominant-baseline='middle' font-family='Arial' font-weight='bold' font-size='85'>" & _Percentage & "<tspan font-size='80' fill='white'>%</tspan></text>" &
     UNICHAR(10) &
     "    <!-- Progress bar rectangle with animation -->" &
     UNICHAR(10) &
@@ -78,4 +78,3 @@ RETURN
     "    </rect>" &
     UNICHAR(10) &
     "</svg>"
-
