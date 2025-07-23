@@ -1,0 +1,26 @@
+25th Working Day from Logged Date = 
+VAR LoggedDate = DimStudy[Final_Protocol_Available]
+VAR Target25thWorkDay = 
+    IF(
+        NOT ISBLANK(LoggedDate),
+        CALCULATE(
+            MAX('Calendar Table'[Date]),
+            FILTER(
+                'Calendar Table',
+                'Calendar Table'[Date] >= LoggedDate
+                && 'Calendar Table'[Working Day] = 1
+                && COUNTROWS(
+                    FILTER(
+                        'Calendar Table',
+                        'Calendar Table'[Date] >= LoggedDate
+                        && 'Calendar Table'[Date] <= EARLIER('Calendar Table'[Date])
+                        && 'Calendar Table'[Working Day] = 1
+                    )
+                ) = 25
+            )
+        ),
+        BLANK()
+    )
+RETURN Target25thWorkDay
+
+//request: calculate due date for Budget, budget needs to be completed in 25 business days from protocol
