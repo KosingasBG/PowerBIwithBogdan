@@ -1,0 +1,35 @@
+FIRSTNONBLANK
+
+ CALCULATE(
+        FIRSTNONBLANK('SPS Resourcing Tracker'[SBSA], 1),
+        FILTER(
+           ALL('SPS Resourcing Tracker'),
+            'SPS Resourcing Tracker'[Study Number] = ('Fund_Approval_Report (FA) - scheduled'[Study Name])
+        )
+    )
+
+________________________________________________________________________________________________-
+
+
+VAR _second_lookup = 
+    CALCULATE(
+        FIRSTNONBLANK('SPS Resourcing Tracker'[SBSA], 1),
+        FILTER(
+           ALL('SPS Resourcing Tracker'),
+            'SPS Resourcing Tracker'[Study Number] = ('Fund_Approval_Report (FA) - scheduled'[Study Name])
+        )
+    )
+VAR _first_lookup =
+    CALCULATE(
+        FIRSTNONBLANK('SPS Resourcing Tracker'[SBSA], 1),
+        FILTER(
+            ALL('SPS Resourcing Tracker'),
+            'SPS Resourcing Tracker'[Concat ID] = ('Fund_Approval_Report (FA) - scheduled'[Concat_ID])
+        )
+    )
+    var _result = IF(NOT ISBLANK(_first_lookup),_first_lookup, IF(ISBLANK(_first_lookup),_second_lookup))
+    var _secondresult = IF('Fund_Approval_Report (FA) - scheduled'[Site Country]="Japan","Japan NA",_result)
+    var thirdresult = IF(ISBLANK(_secondresult),'Fund_Approval_Report (FA) - scheduled'[Created by],_secondresult)
+   // var _result = IF(NOT(ISBLANK(_lookup)), _lookup, IF(ISBLANK(_study_lookup), _study_lookup) )
+RETURN
+IF(ISBLANK(thirdresult),"Not Yet Assigned",thirdresult)
