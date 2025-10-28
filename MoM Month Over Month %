@@ -1,0 +1,19 @@
+MoM month over month = 
+VAR CM = CALCULATE(
+    [Total Sales],
+    'Calendar Table'[Year] = YEAR(TODAY()),
+    'Calendar Table'[Year] = MONTH(TODAY())
+)
+var PM = 
+CALCULATE(
+    CM,
+    DATEADD('Calendar Table'[Date],-1,MONTH)
+    )
+var perc= DIVIDE(CM-PM,PM)
+var _format = FORMAT(perc, "0.0%;0.0%" )
+RETURN
+IF(
+    perc>0,
+    UNICHAR(129029)& " " & _format,
+    UNICHAR(129031) & " " & _format
+)
