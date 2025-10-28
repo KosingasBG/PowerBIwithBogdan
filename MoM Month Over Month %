@@ -17,3 +17,22 @@ IF(
     UNICHAR(129029)& " " & _format,
     UNICHAR(129031) & " " & _format
 )
+_______________________________________________-
+for DAX query view to create funciton:
+
+DEFINE
+FUNCTION Mom_Perc = (_measure : expr ) =>
+VAR cm = _measure
+var pm = 
+    CALCULATE(
+        _measure,
+        DATEADD('Calendar Table'[Date],-1,MONTH)
+    )
+var perc= DIVIDE(cm-pm,pm)
+var _format = FORMAT(perc, "0.0%;0.0%" )
+RETURN
+IF(
+    perc>0,
+    UNICHAR(129029)& " " & _format,
+    UNICHAR(129031) & " " & _format
+)
