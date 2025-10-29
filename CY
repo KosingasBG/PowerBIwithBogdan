@@ -1,0 +1,12 @@
+CY Revenue = 
+CALCULATE(
+    [Total Revenue sumx],
+    FILTER(
+        ALL(sales[Date]),
+        YEAR(sales[Date]) = 
+            CALCULATE(
+                YEAR(MAX(sales[Date])),
+                ALL(sales)
+            )
+    )
+)
