@@ -1,0 +1,23 @@
+1Lowest Priced Product = 
+CALCULATE(
+    VALUES(products[Product_Name]),
+    FILTER(
+        products,
+       products[Product_Price] = MIN(products[Product_Price])
+    )
+)
+
+Result is Product Name with lowes cost
+_____________________________________________-
+Lowest Priced Product = 
+VAR MinPrice = MIN(products[Product_Price])
+RETURN
+    CALCULATE(
+        SELECTEDVALUE(products[Product_Name], "Multiple Products"),
+        FILTER(
+            products,
+            products[Product_Price]= MinPrice
+        )
+    )
+
+Result is Name of the product with lowest cost if there is multiple products with same cost then Multiple products
