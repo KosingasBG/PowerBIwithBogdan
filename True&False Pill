@@ -40,6 +40,35 @@ Set Data Category(Measure tools) to Image URL
       Table is Hidden Icon = IF(
           SELECTEDVALUE( _Tables[IsHidden] ) = TRUE( ),
           [True Pill],
+
+Shorter version =  
+    VAR _Width = "150"
+      VAR _Height = "50"
+      VAR _true_FillColour = "#00BF77"
+      VAR TextColour = "#000000"
+      VAR _true_DisplayText = "True"
+      VAR _FontStyle = "Segoe UI"
+      VAR _FontSize = "24"
+      VAR _false_FillColour = "#FD625E"  
+      VAR _false_DisplayText = "False"
+      VAR truepill =      "data:image/svg+xml;utf8, <svg width='" & _Width & "' height='" & _Height & "' xmlns='http://www.w3.org/2000/svg'>
+        <rect width='" & _Width & "' height='" & _Height & "' rx='25' ry='25' fill='" & _true_FillColour & "' />
+        <text x='50%' y='50%' fill='" & TextColour & "' font-family='" & _FontStyle & "' font-size='" & _FontSize & "' dominant-baseline='middle' text-anchor='middle'>"& _true_DisplayText &"</text>
+      </svg>"
+      var falsepill =      "data:image/svg+xml;utf8, <svg width='" & _Width & "' height='" & _Height & "' xmlns='http://www.w3.org/2000/svg'>
+        <rect width='" & _Width & "' height='" & _Height & "' rx='25' ry='25' fill='" & _false_FillColour & "' />
+        <text x='50%' y='50%' fill='" & TextColour & "' font-family='" & _FontStyle & "' font-size='" & _FontSize & "' dominant-baseline='middle' text-anchor='middle'>"& _false_DisplayText &"</text>
+      </svg>"   
+
+//Set Data Category(Measure tools) to Image URL
+
+//Part Create Measure that you will use in table as value
+RETURN
+
+       IF(
+          input ="Y",
+         truepill,falsepill
+      )
           [False Pill]
       )
 Set Data Category(Measure tools) to Image URL
