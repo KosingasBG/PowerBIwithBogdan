@@ -1,0 +1,31 @@
+//Creates welcome message : Good morning Bogdan Pavlovic
+
+Greeting = 
+VAR raw_user = COALESCE(USERPRINCIPALNAME(), USERNAME())
+VAR email_user = 
+    IF(
+        CONTAINSSTRING(raw_user, "@"), 
+        LEFT(raw_user, FIND("@", raw_user) - 1), 
+        raw_user
+    )
+VAR _username = 
+    IF(
+        CONTAINSSTRING(email_user, "\"), 
+        RIGHT(email_user, LEN(email_user) - FIND("\", email_user)), 
+        email_user
+    )
+VAR with_space = SUBSTITUTE(_username, ".", " ")
+VAR first_name = LEFT(with_space, FIND(" ", with_space) - 1)
+VAR last_name = RIGHT(with_space, LEN(with_space) - FIND(" ", with_space))
+VAR capitalized_first = UPPER(LEFT(first_name, 1)) & LOWER(RIGHT(first_name, LEN(first_name) - 1))
+VAR capitalized_last = UPPER(LEFT(last_name, 1)) & LOWER(RIGHT(last_name, LEN(last_name) - 1))
+VAR hour_time = HOUR(NOW())
+VAR greeting = 
+    SWITCH(
+        TRUE(),
+        hour_time < 12, "Good Morning",
+        hour_time >= 12 && hour_time < 17, "Good Afternoon",
+        "Good Evening"
+    )
+RETURN
+    greeting & " " & capitalized_first & " " & capitalized_last
